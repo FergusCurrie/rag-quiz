@@ -1,5 +1,8 @@
 {
     "name": "rag-quiz", // replace with name
+    "runArgs": [
+        "--network=rag_quiz"
+    ],
     "dockerFile": "Dockerfile.dev",
     "context": "..",
     "customizations": {
@@ -11,7 +14,6 @@
                 "ms-azuretools.vscode-docker",
                 "charliermarsh.ruff",
                 "njpwerner.autodocstring"
-
             ],
             "settings": {
                 "terminal.integrated.defaultProfile.linux": "bash",
@@ -22,7 +24,7 @@
                     "editor.codeActionsOnSave": {
                         "source.fixAll": true
                     }
-                } 
+                }
             }
         }
     }

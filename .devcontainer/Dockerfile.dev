@@ -33,8 +33,6 @@ RUN poetry install --no-root --no-interaction
 # create poetry kernel
 RUN poetry run python -m ipykernel install --user --name=poetry-kernel
 
-COPY .devcontainer/themes.jupyterlab-settings /root/.jupyter/lab/user-settings/@jupyterlab/apputils-extension/
-
 
 EXPOSE 8888
 
