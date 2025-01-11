@@ -9,7 +9,7 @@ poetry self add poetry-plugin-shell
 
 
 Backend:
-uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
+uvicorn backend.app:app --host 0.0.0.0 --port 8087 --reload
 
 Frontend:
 cd frontend 

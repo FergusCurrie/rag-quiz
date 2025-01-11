@@ -1,4 +1,4 @@
-from load_env_config import get_env
+from backend.load_env_config import get_env
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
