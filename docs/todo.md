@@ -1,5 +1,9 @@
-- [ ] create class for querying app 
-- [ ] write crud for tables 
-- [ ] create main program flow 
-- [ ] confirm happy with db structure
-- [ ] 
+- [x] create class for querying app 
+- [x] write crud for tables 
+- [x] create main program flow 
+- [x] confirm happy with db structure
+- [ ] user rating 
+- [ ] ui 
+    - [ ] timing responses 
+- [ ] improve prompt eng for eval. maybe ask it to produce a number of bullets that the answer should have.  
+- [ ] design knowledge graph format 
