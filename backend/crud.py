@@ -92,12 +92,14 @@ def delete_prompt(db: Session, prompt_id: UUID) -> bool:
 def create_question(
     db: Session, 
     question: str,
-    answer: str
+    answer: str,
+    concept_id: UUID
 ) -> models.Question:
     """Create a new question in the database"""
     db_question = models.Question(
         question=question,
-        answer=answer
+        answer=answer,
+        concept_id=concept_id
     )
     db.add(db_question)
     db.commit()
@@ -110,11 +112,17 @@ def get_question(db: Session, question_id: UUID) -> models.Question | None:
         models.Question.question_id == question_id
     ).first()
 
+def get_all_questions(db: Session) -> list[models.Question]:
+    """Retrieve all questions from the database"""
+    return db.query(models.Question).all()
+
+
 def update_question(
     db: Session, 
     question_id: UUID,
     question: str | None = None,
-    answer: str | None = None
+    answer: str | None = None,
+    concept_id: UUID | None = None
 ) -> models.Question | None:
     """Update a question's attributes"""
     db_question = get_question(db, question_id)
@@ -125,6 +133,8 @@ def update_question(
         db_question.question = question
     if answer is not None:
         db_question.answer = answer
+    if concept_id is not None:
+        db_question.concept_id = concept_id
     
     db.commit()
     db.refresh(db_question)
@@ -168,6 +178,11 @@ def get_review(db: Session, review_id: UUID) -> models.Review | None:
     return db.query(models.Review).filter(
         models.Review.review_id == review_id
     ).first()
+
+def get_all_reviews(db: Session) -> list[models.Review]:
+    """Retrieve all reviews from the database"""
+    return db.query(models.Review).all()
+
 
 def update_review(
     db: Session,

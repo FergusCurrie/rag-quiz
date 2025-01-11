@@ -23,7 +23,7 @@ class ConceptStore(Base):
     concept: Mapped[str] = mapped_column(String)  # Added concept string field
     created_date: Mapped[datetime] = mapped_column(default=func.now())
     user_created: Mapped[bool] = mapped_column(Boolean, default=False)
-
+    questions: Mapped[List["Question"]] = relationship(back_populates="concept")
     reviews: Mapped[List["Review"]] = relationship(back_populates="concept")
     from_relationships = relationship("KnowledgeGraph", 
                                     back_populates="from_concept",
@@ -39,7 +39,8 @@ class Question(Base):
     question: Mapped[str]
     answer: Mapped[str]
     created_date: Mapped[datetime] = mapped_column(default=func.now())
-
+    concept_id: Mapped[UUID] = mapped_column(ForeignKey("concept_store.concept_id"))
+    concept: Mapped["ConceptStore"] = relationship(back_populates="questions")
     reviews: Mapped[List["Review"]] = relationship(back_populates="question")
 
 class Review(Base):
