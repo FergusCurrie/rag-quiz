@@ -1,0 +1,5 @@
+- [ ] create class for querying app 
+- [ ] write crud for tables 
+- [ ] create main program flow 
+- [ ] confirm happy with db structure
+- [ ] 

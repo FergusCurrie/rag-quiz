@@ -2,6 +2,7 @@ from connections import get_postgres_db, get_postgres_conn
 from sqlalchemy import text
 from models import Base
 from sqlalchemy import create_engine
+from crud import create_concept
 
 def test_postgres_connection(db):
     try:
@@ -73,13 +74,32 @@ def list_tables(db):
         print(f"Failed to list tables: {str(e)}")
         return False
 
-if __name__ == "__main__":
+
+def main():
     print('Running')
+    # setup 
     engine = create_engine(get_postgres_conn())  # Create engine first
     db = next(get_postgres_db())  # Get session
-    list_databases(db)
-
-    # Change this line to use engine instead of db session
+    Base.metadata.drop_all(engine) 
     Base.metadata.create_all(engine)
 
-    list_tables(db)
+    running = True 
+    while running: 
+        inp = input('Press Q for question, A for add, E for exit. ')
+        if inp.lower().strip() == 'e':
+            running = False
+            break
+
+        if inp.lower().strip() == 'a':
+            concept = input('Enter concept: ')
+            print(concept)
+            result = create_concept(db, concept, user_created=True)
+            print(result)
+            running = False
+            break
+
+
+
+if __name__ == "__main__":
+    main()
+

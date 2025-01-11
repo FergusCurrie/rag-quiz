@@ -13,18 +13,24 @@ class PromptStore(Base):
     __tablename__ = "prompt_store"
 
     prompt_id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    # prompt type 
     created_date: Mapped[datetime] = mapped_column(default=func.now())
 
 class ConceptStore(Base):
     __tablename__ = "concept_store"
 
     concept_id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    concept: Mapped[str] = mapped_column(String)  # Added concept string field
     created_date: Mapped[datetime] = mapped_column(default=func.now())
     user_created: Mapped[bool] = mapped_column(Boolean, default=False)
 
     reviews: Mapped[List["Review"]] = relationship(back_populates="concept")
-    from_relationships: Mapped[List["KnowledgeGraph"]] = relationship(foreign_keys="[KnowledgeGraph.from_concept_id]")
-    to_relationships: Mapped[List["KnowledgeGraph"]] = relationship(foreign_keys="[KnowledgeGraph.to_concept_id]")
+    from_relationships = relationship("KnowledgeGraph", 
+                                    back_populates="from_concept",
+                                    foreign_keys="KnowledgeGraph.from_concept_id")
+    to_relationships = relationship("KnowledgeGraph", 
+                                  back_populates="to_concept",
+                                  foreign_keys="KnowledgeGraph.to_concept_id")
 
 class Question(Base):
     __tablename__ = "questions"
@@ -60,7 +66,11 @@ class KnowledgeGraph(Base):
     to_concept_id: Mapped[UUID] = mapped_column(ForeignKey("concept_store.concept_id"))
     relationship: Mapped[str]
 
-    from_concept: Mapped["ConceptStore"] = relationship(foreign_keys=[from_concept_id])
-    to_concept: Mapped["ConceptStore"] = relationship(foreign_keys=[to_concept_id])
+    from_concept = relationship("ConceptStore", 
+                              back_populates="from_relationships",
+                              foreign_keys=[from_concept_id])
+    to_concept = relationship("ConceptStore", 
+                            back_populates="to_relationships",
+                            foreign_keys=[to_concept_id])
 
     
