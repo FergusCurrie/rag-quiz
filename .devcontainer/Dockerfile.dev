@@ -1,0 +1,42 @@
+# Step 2: Set Up Django Backend
+FROM python:3.12-slim
+
+ENV PROEJCT_NAME python-template
+
+# set workdir to /workspaces/<project_folder_name>
+# this is default place devcontainer.json mounts to, note that creating files in this dockerfile is problematic because the mount happens after. 
+# this should be focused on setting up env
+ENV WORKDIR /workspaces/${PROEJCT_NAME}
+WORKDIR ${WORKDIR}
+
+# Install CMake and other necessary build tools
+RUN apt-get update && apt-get install -y \
+    cmake \
+    build-essential \
+    pipx \ 
+    git \
+    curl
+
+
+RUN pip install poetry
+
+# set poetry to install virtual env globally 
+RUN poetry config virtualenvs.in-project false
+
+# devcontainer.json hasn't mounted yet, so workdir doens't have project code. therefore copy accross
+# the pyproject.toml, lock, so that env can be installed
+COPY poetry.lock pyproject.toml ${WORKDIR}
+
+# install poetry packages, don't install this project, auto reply YES
+RUN poetry install --no-root --no-interaction
+
+# create poetry kernel
+RUN poetry run python -m ipykernel install --user --name=poetry-kernel
+
+COPY .devcontainer/themes.jupyterlab-settings /root/.jupyter/lab/user-settings/@jupyterlab/apputils-extension/
+
+
+EXPOSE 8888
+
+
+

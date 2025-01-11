@@ -1,0 +1,12 @@
+repos:
+  # - repo: local
+  #   hooks:
+  #     - id: no-commit-to-main
+  #       name: No commit to main
+  #       entry: bash -c 'current_branch=$(git symbolic-ref --short HEAD); if [ "$current_branch" = "main" ]; then echo "You cannot commit directly to the main branch."; exit 1; fi'
+  #       language: system
+  #       stages: [commit]
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.7.1
+    hooks:
+      - id: nbstripout

@@ -1,0 +1,29 @@
+{
+    "name": "rag-quiz", // replace with name
+    "dockerFile": "Dockerfile.dev",
+    "context": "..",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "mechatroner.rainbow-csv",
+                "zhang-renyang.vscode-react",
+                "ms-azuretools.vscode-docker",
+                "charliermarsh.ruff",
+                "njpwerner.autodocstring"
+
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "editor.formatOnSave": true,
+                "editor.defaultFormatter": null,
+                "[python]": {
+                    "editor.formatOnSave": true,
+                    "editor.codeActionsOnSave": {
+                        "source.fixAll": true
+                    }
+                } 
+            }
+        }
+    }
+}

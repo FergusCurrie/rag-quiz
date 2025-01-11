@@ -1,0 +1,29 @@
+
+{
+    // "files.exclude": {
+    //   ".*": true,
+    //   "**/.*": true
+    // },
+    "workbench.colorCustomizations": {
+      "editor.lineHighlightBorder": "#138049",
+    },
+    "yaml.schemas": {
+      "file:///Users/ferguscurrie/.vscode/extensions/atlassian.atlascode-3.0.10/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "liveServer.settings.donotShowInfoMsg": true,
+    "redhat.telemetry.enabled": false,
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.advanced": {},
+    "github.copilot.enable": {
+      "*": true,
+      "plaintext": false,
+      "markdown": true,
+      "scminput": false,
+      "yaml": true,
+      "python": true
+    },
+    "terminalThemes.style": "Atelier Estuary (base16)",
+    "remote.autoForwardPortsSource": "hybrid"
+  }
+  
