@@ -1,6 +1,7 @@
-from uuid import UUID
-from sqlalchemy.orm import Session
 from backend import models
+from sqlalchemy.orm import Session
+from uuid import UUID
+
 
 def create_concept(db: Session, concept: str, user_created: bool = False) -> models.ConceptStore:
     """Create a new concept in the database"""
@@ -18,6 +19,14 @@ def get_concept(db: Session, concept_id: UUID) -> models.ConceptStore | None:
     return db.query(models.ConceptStore).filter(
         models.ConceptStore.concept_id == concept_id
     ).first()
+
+
+def get_concept_by_name(db: Session, concept: str) -> models.ConceptStore | None:
+    """Retrieve a concept by its name"""
+    return db.query(models.ConceptStore).filter(
+        models.ConceptStore.concept == concept
+    ).first()
+
 
 def update_concept(
     db: Session, 

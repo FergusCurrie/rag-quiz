@@ -5,5 +5,7 @@
 - [ ] user rating 
 - [ ] ui 
     - [ ] timing responses 
-- [ ] improve prompt eng for eval. maybe ask it to produce a number of bullets that the answer should have.  
+- [ ] improve prompt eng for eval. maybe ask it to produce a grading ruberic.  
+    - [ ] dont care about spelling. 
 - [ ] design knowledge graph format 
+- [ ] good logging 

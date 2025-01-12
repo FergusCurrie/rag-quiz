@@ -10,6 +10,8 @@ const App = () => {
     // responses 
     const [llmResponse, setLlmResponse] = useState('');
     const [llmScore, setLlmScore] = useState('');
+    const [timeElapsed, setTimeElapsed] = useState(0);
+    const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(null);
 
     const handleGetQuestion = async () => {
         try {
@@ -20,6 +22,12 @@ const App = () => {
             setAnswer('')
             setLlmResponse('')
             setLlmScore('')
+            // Reset and start timer
+            setTimeElapsed(0);
+            const interval = setInterval(() => {
+                setTimeElapsed(prev => prev + 1);
+            }, 1000);
+            setTimerInterval(interval);
         } catch (error) {
             console.log(error);
             alert(error);
@@ -28,10 +36,17 @@ const App = () => {
 
     const handleSubmitAnswer = async () => {
         try {
+            // Clear timer
+            alert(timeElapsed)
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                setTimerInterval(null);
+            }
             console.log(answer, questionId)
             const response = await api.post('/api/answer', {
                 user_answer: answer,
-                question_id: questionId
+                question_id: questionId,
+                time_taken: timeElapsed
             });
             console.log(response)
             setLlmResponse(response.data.llm_response)
@@ -42,12 +57,22 @@ const App = () => {
         }
     }
 
+    // Cleanup timer on component unmount
+    useEffect(() => {
+        return () => {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+        };
+    }, [timerInterval]);
+
     useEffect(() => {
         handleGetQuestion();
     }, []);
 
     return (
         <Box sx={{ p: 3, maxWidth: 600, mx: 'auto' }}>
+            <h1>hello</h1>
             <Paper elevation={3} sx={{ p: 2, mb: 3, backgroundColor: '#f5f5f5' }}>
                 <Typography variant="h5" gutterBottom>
                     {question}

@@ -1,9 +1,10 @@
-from datetime import datetime
 import uuid
-from typing import List
-from sqlalchemy import ForeignKey, String, Integer, Boolean, DateTime, func
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from datetime import datetime
+from sqlalchemy import Boolean, ForeignKey, String, func
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from typing import List
+
 
 class Base(DeclarativeBase):
     def to_dict(self):

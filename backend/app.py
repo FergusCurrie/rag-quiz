@@ -1,20 +1,16 @@
 
+import logging
+import random
+from backend.connections import get_postgres_db
+from backend.crud import create_review, get_all_questions, get_question
+from backend.logging_config import LOGGING_CONFIG
+from backend.qa import judge_quiz_answer
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from backend.connections import get_postgres_db, get_postgres_conn
-from sqlalchemy import text
-from backend.models import Base
-from sqlalchemy import create_engine
-from backend.crud import create_concept, create_question, get_all_questions, create_review, get_all_reviews, get_question
-from backend.qa import query_concept_quiz, judge_quiz_answer
-import random
-from sqlalchemy.orm import Session
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-import logging 
-from backend.logging_config import LOGGING_CONFIG
-
+from sqlalchemy.orm import Session
 
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -54,6 +50,7 @@ async def get_next_question(db: Session = Depends(get_postgres_db)):
 class Submission(BaseModel):
     user_answer: str
     question_id: str
+    time_taken: int
 
 @app.post("/api/answer")
 async def submit_question_answer(submission: Submission, db: Session = Depends(get_postgres_db)):
