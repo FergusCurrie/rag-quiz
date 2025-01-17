@@ -9,3 +9,5 @@
     - [ ] dont care about spelling. 
 - [ ] design knowledge graph format 
 - [ ] good logging 
+- [ ] sorting alembic out 
+- [ ] setup pytest 

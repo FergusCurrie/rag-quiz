@@ -28,6 +28,7 @@ sqlalchemy = "^2.0.37"
 psycopg2-binary = "^2.9.10"
 fastapi = "^0.115.6"
 uvicorn = "^0.34.0"
+alembic = "^1.14.0"
 
 
 [build-system]

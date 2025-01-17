@@ -4,3 +4,6 @@
 - made databases
 - made crud
 - basic workflow 
+
+17 jan 
+- 

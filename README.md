@@ -32,3 +32,11 @@ Other thoughts
 Optimizing Spaced Repetition Schedule by Capturing the Dynamics of Memory
 Jingyong Su , Junyao Ye , Liqiang Nie , Senior Member, IEEE, Yilong Cao , and Yongyong Chen
 
+
+# Alembic 
+
+1. alembic init migrations 
+
+1. alembic revision -m "add time_taken to reviews"
+    - alembic revision --autogenerate -m "add time_taken to reviews"
+2. alembic upgrade head
