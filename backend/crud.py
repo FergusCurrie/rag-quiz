@@ -155,10 +155,11 @@ def create_review(
     concept_id: UUID,
     question_id: UUID,
     time_taken: int,
-    llm_response: str | None = None,
-    llm_model: str | None = None,
-    llm_rating: int | None = None,
-    user_response: str | None = None,
+    llm_response: str,
+    llm_model: str,
+    llm_rating: int,
+    user_response: str,
+    user_rating: int,
 ) -> models.Review:
     """Create a new review in the database"""
     # logging.info(time_taken)
@@ -170,6 +171,7 @@ def create_review(
         llm_model=llm_model,
         llm_rating=llm_rating,
         user_response=user_response,
+        user_rating=user_rating,
     )
     db.add(db_review)
     db.commit()

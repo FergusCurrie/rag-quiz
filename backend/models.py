@@ -61,6 +61,7 @@ class Review(Base):
     question_id: Mapped[UUID] = mapped_column(ForeignKey("questions.question_id"))
     user_response: Mapped[str | None]
     time_taken: Mapped[int | None]
+    user_rating: Mapped[int | None]
 
     concept: Mapped["ConceptStore"] = relationship(back_populates="reviews")
     question: Mapped["Question"] = relationship(back_populates="reviews")

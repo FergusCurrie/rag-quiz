@@ -6,4 +6,5 @@
 - basic workflow 
 
 17 jan 
-- 
+- got alembic working 
+- added user rating

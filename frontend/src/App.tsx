@@ -35,22 +35,43 @@ const App = () => {
     };
 
     const handleSubmitAnswer = async () => {
+        /**
+         * Handles submitting the user's answer to the API.
+         * Stops the timer and sends the answer to be evaluated.
+         * Updates the UI with the LLM's response and score.
+         */
         try {
             // Clear timer
-            alert(timeElapsed)
             if (timerInterval) {
                 clearInterval(timerInterval);
                 setTimerInterval(null);
             }
-            console.log(answer, questionId)
             const response = await api.post('/api/answer', {
                 user_answer: answer,
                 question_id: questionId,
-                time_taken: timeElapsed
             });
             console.log(response)
             setLlmResponse(response.data.llm_response)
             setLlmScore(response.data.llm_score)
+        } catch (error) {
+            console.log(error);
+            alert(error);
+        }
+    }
+
+    const handleSubmitReview = async (user_rating: number) => {
+        try {
+            const response = await api.post('/api/review', {
+                user_answer: answer,
+                question_id: questionId,
+                time_taken: timeElapsed,
+                llm_response: llmResponse,
+                llm_score: llmScore,
+                user_rating: user_rating
+
+            });
+            // Move to next question
+            handleGetQuestion()
         } catch (error) {
             console.log(error);
             alert(error);
@@ -111,13 +132,43 @@ const App = () => {
             )}
 
             {llmResponse && (
-                <Button
-                    variant="contained"
-                    onClick={handleGetQuestion}
-                    sx={{ mt: 2, backgroundColor: 'green', '&:hover': { backgroundColor: 'darkred' } }}
-                >
-                    Next Question
-                </Button>
+                <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+                    <Button
+                        variant="contained"
+                        onClick={() => handleSubmitReview(1)}
+                        sx={{ backgroundColor: 'green', '&:hover': { backgroundColor: 'darkred' } }}
+                    >
+                        1
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => handleSubmitReview(2)}
+                        sx={{ backgroundColor: 'green', '&:hover': { backgroundColor: 'darkred' } }}
+                    >
+                        2
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => handleSubmitReview(3)}
+                        sx={{ backgroundColor: 'green', '&:hover': { backgroundColor: 'darkred' } }}
+                    >
+                        3
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => handleSubmitReview(4)}
+                        sx={{ backgroundColor: 'green', '&:hover': { backgroundColor: 'darkred' } }}
+                    >
+                        4
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => handleSubmitReview(5)}
+                        sx={{ backgroundColor: 'green', '&:hover': { backgroundColor: 'darkred' } }}
+                    >
+                        5
+                    </Button>
+                </Box>
             )}
 
 
