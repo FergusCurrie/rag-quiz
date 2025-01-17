@@ -16,7 +16,8 @@ class PromptStore(Base):
     __tablename__ = "prompt_store"
 
     prompt_id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    # prompt type
+    prompt_type: Mapped[str] = mapped_column(String)
+    prompt: Mapped[str] = mapped_column(String)
     created_date: Mapped[datetime] = mapped_column(default=func.now())
 
 
@@ -47,6 +48,8 @@ class Question(Base):
     concept_id: Mapped[UUID] = mapped_column(ForeignKey("concept_store.concept_id"))
     concept: Mapped["ConceptStore"] = relationship(back_populates="questions")
     reviews: Mapped[List["Review"]] = relationship(back_populates="question")
+    prompt_id: Mapped[UUID] = mapped_column(ForeignKey("prompt_store.prompt_id"), nullable=True)
+    prompt: Mapped["PromptStore"] = relationship()
 
 
 class Review(Base):
@@ -65,6 +68,8 @@ class Review(Base):
 
     concept: Mapped["ConceptStore"] = relationship(back_populates="reviews")
     question: Mapped["Question"] = relationship(back_populates="reviews")
+    prompt_id: Mapped[UUID] = mapped_column(ForeignKey("prompt_store.prompt_id"), nullable=True)
+    prompt: Mapped["PromptStore"] = relationship()
 
 
 class KnowledgeGraph(Base):

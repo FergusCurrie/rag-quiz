@@ -1,0 +1,12 @@
+Fact Table Dimensional Modelling
+Fact Table
+Dimension Table
+L1 Cache
+L2 Cache
+Register
+XGboost
+decision tree
+backpropogation
+mean squared error
+mean absolute error
+root mean squared error

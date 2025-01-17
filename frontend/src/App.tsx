@@ -10,6 +10,7 @@ const App = () => {
     // responses 
     const [llmResponse, setLlmResponse] = useState('');
     const [llmScore, setLlmScore] = useState('');
+    const [judgePromptId, setJudgePromptId] = useState('');
     const [timeElapsed, setTimeElapsed] = useState(0);
     const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(null);
 
@@ -22,6 +23,7 @@ const App = () => {
             setAnswer('')
             setLlmResponse('')
             setLlmScore('')
+            setJudgePromptId('')
             // Reset and start timer
             setTimeElapsed(0);
             const interval = setInterval(() => {
@@ -53,6 +55,7 @@ const App = () => {
             console.log(response)
             setLlmResponse(response.data.llm_response)
             setLlmScore(response.data.llm_score)
+            setJudgePromptId(response.data.prompt_id)
         } catch (error) {
             console.log(error);
             alert(error);
@@ -67,7 +70,8 @@ const App = () => {
                 time_taken: timeElapsed,
                 llm_response: llmResponse,
                 llm_score: llmScore,
-                user_rating: user_rating
+                user_rating: user_rating,
+                prompt_id: judgePromptId
 
             });
             // Move to next question

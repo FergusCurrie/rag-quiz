@@ -96,9 +96,9 @@ def delete_prompt(db: Session, prompt_id: UUID) -> bool:
     return True
 
 
-def create_question(db: Session, question: str, answer: str, concept_id: UUID) -> models.Question:
+def create_question(db: Session, question: str, answer: str, concept_id: UUID, prompt_id) -> models.Question:
     """Create a new question in the database"""
-    db_question = models.Question(question=question, answer=answer, concept_id=concept_id)
+    db_question = models.Question(question=question, answer=answer, concept_id=concept_id, prompt_id=prompt_id)
     db.add(db_question)
     db.commit()
     db.refresh(db_question)
@@ -160,6 +160,7 @@ def create_review(
     llm_rating: int,
     user_response: str,
     user_rating: int,
+    prompt_id: str,
 ) -> models.Review:
     """Create a new review in the database"""
     # logging.info(time_taken)
@@ -172,6 +173,7 @@ def create_review(
         llm_rating=llm_rating,
         user_response=user_response,
         user_rating=user_rating,
+        prompt_id=prompt_id,
     )
     db.add(db_review)
     db.commit()
@@ -223,5 +225,58 @@ def delete_review(db: Session, review_id: UUID) -> bool:
         return False
 
     db.delete(db_review)
+    db.commit()
+    return True
+
+
+def create_prompt(db: Session, prompt_type: str, prompt: str) -> models.PromptStore:
+    """Create a new prompt in the database if one with the same prompt text doesn't exist"""
+    existing_prompt = db.query(models.PromptStore).filter(models.PromptStore.prompt == prompt).first()
+    if existing_prompt is not None:
+        print("Prompt already exists")
+        return existing_prompt
+
+    db_prompt = models.PromptStore(prompt_type=prompt_type, prompt=prompt)
+    db.add(db_prompt)
+    db.commit()
+    db.refresh(db_prompt)
+    return db_prompt
+
+
+def get_prompt(db: Session, prompt_id: UUID) -> models.PromptStore | None:
+    """Retrieve a prompt by its ID"""
+    return db.query(models.PromptStore).filter(models.PromptStore.prompt_id == prompt_id).first()
+
+
+def get_all_prompts(db: Session) -> list[models.PromptStore]:
+    """Retrieve all prompts from the database"""
+    return db.query(models.PromptStore).all()
+
+
+def update_prompt(
+    db: Session, prompt_id: UUID, prompt_type: str | None = None, prompt: str | None = None
+) -> models.PromptStore | None:
+    """Update a prompt's attributes"""
+    db_prompt = get_prompt(db, prompt_id)
+    if db_prompt is None:
+        return None
+
+    if prompt_type is not None:
+        db_prompt.prompt_type = prompt_type
+    if prompt is not None:
+        db_prompt.prompt = prompt
+
+    db.commit()
+    db.refresh(db_prompt)
+    return db_prompt
+
+
+def delete_prompt(db: Session, prompt_id: UUID) -> bool:
+    """Delete a prompt from the database"""
+    db_prompt = get_prompt(db, prompt_id)
+    if db_prompt is None:
+        return False
+
+    db.delete(db_prompt)
     db.commit()
     return True
