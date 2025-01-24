@@ -10,3 +10,113 @@ backpropogation
 mean squared error
 mean absolute error
 root mean squared error
+gpu kernel
+gpu grid
+gpu block
+OLAP
+OLTP 
+csv
+json
+parquet
+encapsulation
+information hiding 
+a/b testing
+propensity score 
+logistic regression
+recurrent neural network 
+convolutional neural network 
+transformer neural network 
+self-supervised learning 
+kalman filter 
+relu 
+dropout (neural networks)
+adam optimiser
+value function (reinforcement learning)
+policy (refinforcement learning )
+cognitive load theory 
+linear programming 
+branch and bound 
+branch and cut 
+training serving skew 
+markov chain 
+random variable 
+importance sampling 
+kmeans clustering 
+k nearest neighbors 
+logistic regression
+delta lake 
+floating point representation
+python module system
+information entropy
+categorical cross entropy
+binary cross entropy 
+data augmentation
+pearsons correlation
+spearman correlation
+newtons method 
+subgradient
+graph neural networks 
+chinchilla scaling laws
+sampling distribution
+boostrap (statistics)
+data generating process 
+python GIL 
+strategy pattern 
+feature crossing 
+feature hashing 
+markov decision process 
+hierarchical reconcilliation 
+arima 
+arimax 
+exponential smoothing 
+bayes rule
+partial correlation
+kolmogorov complexity
+potential outcomes causal inference 
+knowledge distillation
+data drift (ML)
+quantile regression 
+reservoir sampling
+vc dimension
+log transformation (machine learning)
+one hot encoding 
+hamming code 
+binomial distribution
+poisson distribution 
+q-learning 
+batch normilisation 
+duck typing 
+OSI model 
+socket (network)
+packet (network)
+class imbalance (machine learning)
+model callibration 
+jensens inequality
+liklihood 
+docker 
+dependency injection 
+model quantisation 
+dynammic programming 
+depth first search 
+b-trees 
+red black trees 
+binary trees 
+breadth first search
+interpreted programming lanaguage
+compiled programming lanaguage
+statically vs dynamically typed programming lanaguage
+strongly typed vs weakly typed programming lanaguage
+lazy evaluation 
+mutual information 
+ACID (data engineering)
+ONNX (neural networks)
+optimal transport 
+wasserstein distance 
+mahalanobis distance
+whitening transform
+gradient clipping 
+ROC curve 
+Area under curve 
+interior point method
+softmax distribution 
+indirection (software engineering)

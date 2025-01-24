@@ -1,8 +1,0 @@
-Fact Table 
-Dimension Table 
-L1 Cache 
-L2 Cache 
-Register
-XGboost 
-decision tree
-backpropogation 

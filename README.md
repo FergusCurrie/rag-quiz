@@ -1,26 +1,14 @@
 
 
+# Rag quiz 
 
-`docker network create rag_quiz`
-
-`poetry run python3 main.py`
-
-poetry self add poetry-plugin-shell
+Web app to generate & schedule flashcards based on knowledge base. 
 
 
-Backend:
-uvicorn backend.app:app --host 0.0.0.0 --port 8087 --reload
 
-Frontend:
-cd frontend 
-npm run dev
 
 # Fundemental ideas
 
-- Hallucinations are a feature (critical thinking)
-- 
-
-Other thoughts 
 - Anki is not a good tool. It lacks:
     - context
     - generalised cards 
@@ -49,3 +37,4 @@ Go back one upgrade:
 3. alembic history # checks on old version now 
 4. alembic current # get <revision_id> of new head 
 5. alembic stamp <revision_id> # set database to current 
+
